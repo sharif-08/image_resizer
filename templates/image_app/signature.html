@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Signature Processor</h5>
+                </div>
+                <div class="card-body">
+                    <form action="{% url 'image_app:process_signature' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="signature" class="form-label">Upload Signature</label>
+                            <input type="file" class="form-control" id="signature" name="signature" accept="image/*" required>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="width" class="form-label">Width</label>
+                                <input type="number" class="form-control" id="width" name="width" step="0.01">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="height" class="form-label">Height</label>
+                                <input type="number" class="form-control" id="height" name="height" step="0.01">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="unit" class="form-label">Unit</label>
+                            <select class="form-select" id="unit" name="unit">
+                                <option value="mm">Millimeters</option>
+                                <option value="inches">Inches</option>
+                                <option value="cm">Centimeters</option>
+                                <option value="px">Pixels</option>
+                            </select>
+                        </div>
+ 
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="dpi" class="form-label">DPI</label>
+                                <input type="number" class="form-control" id="dpi" name="dpi" value="300">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="target_size" class="form-label">Target Size (KB)</label>
+                                <input type="number" class="form-control" id="target_size" name="target_size">
+                            </div>
+                        </div>
+
+                        
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                Process Signature
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
